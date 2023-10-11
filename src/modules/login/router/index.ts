@@ -11,14 +11,14 @@ class index implements Module {
         return i18n;
     }
 }
-const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/login',
-        component: () => import('@/modules/login/index.vue'),
-        meta: { hidden: true }
-    },
-];
-routes.forEach((aRoute) => {
-    router.addRoute(aRoute);
-});
+// const routes: Array<RouteRecordRaw> = [
+//     {
+//         path: '/login',
+//         component: () => import('@/modules/login/index.vue'),
+//         meta: { hidden: true }
+//     },
+// ];
+// routes.forEach((aRoute) => {
+//     router.addRoute(aRoute);
+// });
 export default new index();
