@@ -1,57 +1,32 @@
 <template>
-    <div>
-      <a-button type="primary" @click="showModal">Open Modal</a-button>
-      <a-modal
-        v-model:visible="visible"
-        title="Basic Modal"
-        @ok="handleOk"
-        width="100%"
-        wrapClassName="full-modal"
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </a-modal>
-    </div>
-  </template>
-  <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  export default defineComponent({
-    setup() {
-      const visible = ref<boolean>(false);
-  
-      const showModal = () => {
-        visible.value = true;
-      };
-  
-      const handleOk = (e: MouseEvent) => {
-        console.log(e);
-        visible.value = false;
-      };
-      return {
-        visible,
-        showModal,
-        handleOk,
-      };
-    },
-  });
-  </script>
-  <style lang="less">
-  .full-modal {
-    .ant-modal {
-      max-width: 100%;
-      top: 0;
-      padding-bottom: 0;
-      margin: 0;
-    }
-    .ant-modal-content {
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh);
-    }
-    .ant-modal-body {
-      flex: 1;
-    }
-  }
-  </style>
-  
+  <a-radio-group v-model:value="placement" style="margin-right: 8px">
+    <a-radio value="top">top</a-radio>
+    <a-radio value="right">right</a-radio>
+    <a-radio value="bottom">bottom</a-radio>
+    <a-radio value="left">left</a-radio>
+  </a-radio-group>
+  <a-button type="primary" @click="showDrawer">Open</a-button>
+  <a-drawer :width="500" title="Basic Drawer" :placement="placement" :open="open" @close="onClose">
+    <template #extra>
+      <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
+      <a-button type="primary" @click="onClose">Submit</a-button>
+    </template>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </a-drawer>
+</template>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { DrawerProps } from 'ant-design-vue';
+const placement = ref<DrawerProps['placement']>('right');
+const open = ref<boolean>(false);
+
+const showDrawer = () => {
+  open.value = true;
+};
+
+const onClose = () => {
+  open.value = false;
+};
+</script>
